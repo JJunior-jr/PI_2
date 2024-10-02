@@ -1,0 +1,82 @@
+CREATE DATABASE PI_2_2024;
+
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
+    senha VARCHAR(255) NOT NULL,
+    perfil ENUM('administrador', 'usuario') NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP /*armazena data/hora como padrão */
+);
+
+
+CREATE TABLE equipamento (
+    equipamento_id INT AUTO_INCREMENT PRIMARY KEY,
+    serial_number VARCHAR(50) UNIQUE NOT NULL,
+    modelo VARCHAR(50) NOT NULL,
+    wifi_ip_address VARCHAR(15) NOT NULL,
+    coldre BOOLEAN DEFAULT FALSE,
+    alca BOOLEAN DEFAULT FALSE,
+    touch BOOLEAN DEFAULT FALSE,
+    som BOOLEAN DEFAULT FALSE,
+    vibracao BOOLEAN DEFAULT FALSE,
+    gatilho BOOLEAN DEFAULT FALSE,
+    laser BOOLEAN DEFAULT FALSE,
+    status ENUM('disponivel', 'indisponivel') DEFAULT 'disponivel',
+    observacao TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*armazena data/hora como padrão */
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  /*armazena data/hora como padrão e atualiza data/hora quando houver atualização */
+);
+
+
+CREATE TABLE responsavel (
+    responsavel_id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefone VARCHAR(15),
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP /*armazena data/hora como padrão */
+);
+
+
+CREATE TABLE manutencao (
+    manutencao_id INT AUTO_INCREMENT PRIMARY KEY,
+    equipamento_id INT,
+    data_saida DATE NOT NULL,
+    data_retorno DATE,
+    responsavel_id INT,
+    descricao TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*armazena data/hora como padrão */
+    FOREIGN KEY (equipamento_id) REFERENCES equipamento(equipamento_id),
+    FOREIGN KEY (responsavel_id) REFERENCES responsavel(responsavel_id)
+);
+
+
+CREATE TABLE emprestimo (
+    emprestimo_id INT AUTO_INCREMENT PRIMARY KEY,
+    equipamento_id INT,
+    responsavel_id INT,
+    data_saida DATE NOT NULL,
+    data_retorno DATE,
+    status_retorno VARCHAR(20) DEFAULT 'pendente',
+    observacao TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*armazena data/hora como padrão */
+    FOREIGN KEY (equipamento_id) REFERENCES equipamento(equipamento_id),
+    FOREIGN KEY (responsavel_id) REFERENCES responsavel(responsavel_id)
+);
+
+
+CREATE TABLE historico_movimentacao (
+    movimentacao_id INT AUTO_INCREMENT PRIMARY KEY,
+    equipamento_id INT,
+    responsavel_id INT,
+    data_retirada DATE NOT NULL,
+    data_devolucao DATE,
+    observacao TEXT,
+    status VARCHAR(20) DEFAULT 'em uso',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, /*armazena data/hora como padrão */
+    FOREIGN KEY (equipamento_id) REFERENCES equipamento(equipamento_id),
+    FOREIGN KEY (responsavel_id) REFERENCES responsavel(responsavel_id)
+);
+
