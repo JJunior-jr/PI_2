@@ -10,7 +10,7 @@
     {% elif page == 'user' %}
     <div class="nav-buttons">
         <h6>menu</h6>
-        <button>
+        <button id="dashboard" onclick="redirect('/dashboard')">
             <i class="fa-light fa-gauge"></i>
             <span>Dashboard</span>
         </button>
@@ -32,7 +32,7 @@
             <span>Dashboard</span>
         </button>
         <h6>equipamentos</h6>
-        <button id="equipamentos" onclick="redirect('/equipamentos')">
+        <button id="equipamentosAdm" onclick="redirect('/equipamentosAdm')">
             <i class="fa-light fa-wrench"></i>
             <span>Equipamentos</span>
         </button>

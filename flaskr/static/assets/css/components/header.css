@@ -11,12 +11,14 @@ header {
 }
 
 header .account-toggle {
+    width: 140px;
     height: 100%;
     padding: 0 24px;
     z-index: 5;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
 
     font-size: 14px;
@@ -27,8 +29,13 @@ header .account-toggle {
     background-color: var(--off-white);
 }
 
+header .account-toggle span {
+    width: 60px;
+    text-align: center;
+}
+
 header .collapse-toggle {
-    width: calc(100% - 179px);
+    width: calc(100% - 141px);
     height: 100%;
 
     display: flex;
@@ -54,20 +61,13 @@ header .box-account-config button:hover {
     background-color: var(--cool-gray);
 }
 
-header .account-toggle img {
-    width: 32px;
-    height: 32px;
-
-    border-radius: 50%;
-}
-
 header .account-toggle i {
     transition: 600ms;
     font-size: 1.3em;
 }
 
 header .box-account-config {
-    width: 178px;
+    width: 140px;
     position: absolute;
     top: -102px;
     z-index: 3;

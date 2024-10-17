@@ -1,4 +1,4 @@
-function popup(name_inputs, values_inputs, name_buttons, title, url, status) {
+function popup(name_inputs, values_inputs, name_buttons, title, url, message, status) {
     if (status) {
         if (document.querySelector('header') !== null)
             document.querySelector('header').style.display = 'none'
@@ -9,30 +9,22 @@ function popup(name_inputs, values_inputs, name_buttons, title, url, status) {
             popupDiv.style.width = "100vw"
             popupDiv.style.left = "0"
         }
-        const popupToggle = document.createElement('div')
-        popupToggle.className = 'toggle-popup'
-        popupDiv.appendChild(popupToggle)
-        const icon = document.createElement('i')
-        icon.classList.add('fa-light')
-        icon.classList.add('fa-xmark')
-        icon.addEventListener('click', () => {
-            popup(null,null, false)
-        })
-        popupToggle.appendChild(icon)
         const form_content = document.createElement('div')
         form_content.className = 'form-content'
         form_content.innerHTML = `
             <div class="container">
-                <h4>Teste</h4>
+                <div class="title-icon">
+                    <h4>${title}</h4>
+                    <i class="fa-light fa-xmark" onclick="popup()"></i>
+                </div>
                 <hr color="C8CBD9" size="1"/>
                 <div id="box">    
                 </div>
             </div>
         `;
         popupDiv.appendChild(form_content)
-        form_content.querySelector('h4').textContent = title
         box.appendChild(popupDiv)
-        form(name_inputs, values_inputs, name_buttons, url, true)
+        form(name_inputs, values_inputs, name_buttons, url, message,true)
     } else {
         if (document.querySelector('.form-content').querySelector('h4').textContent === "Minha Conta") {
             accountToggle()

@@ -141,7 +141,7 @@ class Table {
         button.setAttribute('onclick',
             `popup(${JSON.stringify(labels).replace(/"/g, "'")}, 
             ${JSON.stringify(Object.values(rowData)).replace(/"/g, "'")}, 
-            ['Editar'], 'Editar', '${this.options.formAction}', true)`);
+            ['Editar'], 'Editar', '${this.options.formAction}','', true)`);
         button.innerHTML = '<i class="fa-light fa-pencil"></i>';
         return button;
     }

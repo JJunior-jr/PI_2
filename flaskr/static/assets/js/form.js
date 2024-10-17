@@ -8,7 +8,7 @@ function norm(str) {
         .toLowerCase()
 }
 
-function form(name, values, buttons, url, popupStatus) {
+function form(name, values, buttons, url, message, popupStatus) {
     let box = document.getElementById('box')
     if (popupStatus)
         box = document.querySelector('.form-content').querySelector('#box')
@@ -19,6 +19,11 @@ function form(name, values, buttons, url, popupStatus) {
             <div class="form-buttons"></div>
         </form>
     `;
+    if (message !== '') {
+        const span = document.createElement('span')
+        span.textContent = message
+        document.querySelector('form').insertAdjacentElement('afterbegin', span)
+    }
 
     let inputsContainer = document.querySelector('.form-inputs')
     let buttonsContainer = document.querySelector('.form-buttons')
@@ -58,6 +63,10 @@ function form(name, values, buttons, url, popupStatus) {
         inputElement.required = true
         labelElement.htmlFor = inputElement.id = inputElement.name = norm(id)
         if (values[index] !== undefined && type !== 'select') {
+            if (type === 'date') {
+                 const [day, month, year] = values[index].split('-');
+                 values[index] = `${year}-${month}-${day}`
+            }
             inputElement.value = values[index]
         }
         labelElement.textContent = label
