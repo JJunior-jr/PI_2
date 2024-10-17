@@ -1,0 +1,33 @@
+{% extends "components/base.html" %}
+{% block title %}Dashboard Admin{% endblock %}
+{% block head %}
+{{super()}}
+<style>
+    .container #box div {
+        grid-template-areas: 'graph_one graph_two'
+                             'graph_three graph_four';
+    }
+
+    .container #box div img:first-child {
+        grid-area: graph_one;
+    }
+
+    .container #box div img:nth-child(2) {
+        grid-area: graph_two;
+    }
+
+    .container #box div img:nth-child(3) {
+        grid-area: graph_three;
+    }
+
+    .container #box div img:last-child {
+        grid-area: graph_four;
+    }
+</style>
+{% endblock %}
+{% set labels = 'show_labels' %}
+{% set page = 'user' %}
+{% set box_title = 'Dashboard' %}
+{% block content %}
+{% include "components/container.html" %}
+{% endblock %}
